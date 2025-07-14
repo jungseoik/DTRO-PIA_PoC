@@ -6,14 +6,12 @@ import threading
 from queue import Queue
 import queue
 import time
-from ui.component.ui_alarm_count import render_count_status_ui
 from ui.component.ui_progress import run_progress_bar_vqa
 from decord import VideoReader, cpu
 from env.config import PROMPT_V3 , PROMPT_V2
 from utils.api.vqa_api import internvl_vision_api_response_vqa
 from env.config import MAX_HEIGHT, MAX_WIDTH, API_URL
-from utils.clip_ebc_onnx import ClipEBCOnnx
-from pia.ai.tasks.OD.models.yolov8.coordinate_utils import LetterBox
+from utils.transform import LetterBox
 transform = LetterBox(new_shape=(MAX_HEIGHT, MAX_WIDTH), scaleup=False)
 
 def render_description_section_vqa():

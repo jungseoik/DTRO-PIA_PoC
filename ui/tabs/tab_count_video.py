@@ -2,7 +2,7 @@ import streamlit as st
 from ui.component.ui_video_input import local_input_video
 import cv2
 import os
-from pia.ai.tasks.OD.models.yolov8.coordinate_utils import LetterBox
+from utils.transform import LetterBox
 import threading
 from queue import Queue
 import queue

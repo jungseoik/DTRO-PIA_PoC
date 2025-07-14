@@ -1,19 +1,7 @@
 
 import streamlit as st
 from ui.component.ui_image_input import local_image_input
-import cv2
-import os
-from pia.ai.tasks.OD.models.yolov8.coordinate_utils import LetterBox
-# from utils.api.ebc_api import call_inference_api
-import threading
-from queue import Queue
-import queue
-import time
 from ui.component.ui_alarm_count import render_image_count_status_ui
-from ui.component.ui_progress import run_progress_bar
-from ui.component.ui_sidebar import siderbar_setting_ui
-from env.config import MAX_HEIGHT, MAX_WIDTH, API_URL
-from decord import VideoReader, cpu
 
 def count_image_tab():
 
