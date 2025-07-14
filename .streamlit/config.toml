@@ -1,0 +1,9 @@
+# .streamlit/config.toml
+
+[theme]
+# 기본 색상 설정
+primaryColor="#FFFFFF"  # 위젯 등 주요 부분에 사용될 색상 (흰색)
+backgroundColor="#0A0A1A"  # 메인 배경색 (어두운 남색 계열)
+secondaryBackgroundColor="#1E1E3F"  # 사이드바 및 일부 요소 배경색 (조금 더 밝은 남색 계열)
+textColor="#FFFFFF"  # 기본 텍스트 색상 (흰색)
+font="sans serif" # 폰트 스타일

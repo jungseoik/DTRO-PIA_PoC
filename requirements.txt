@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pillow
+numpy
+streamlit
+moviepy
+google-cloud-aiplatform
