@@ -16,13 +16,14 @@ if __name__ == "__main__":
  
     ## video ebc cnt - one video
     # process_video_ebc2(video_path = video_path, time_interval = 30)
-    ## cnt only
+    ## image folder cnt only
     # process_image_ebc(folder_path)
     ## dot, dense
     # process_image_ebc_dtro(folder_path)
     ## only dense
     # process_image_ebc_dtro(folder_path, save_dot_map=False)
-    ## subtitle video only one - process    
+    
+    ## only subtitle video only one - process    
     # process_video(video_path, 30, template, lang="en")
-    ## 
-    process_video_v3(video_path, 30, PROMPT_V2)
+    ## subtitle & alarm video only one - 
+    # process_video_v3(video_path, 30, PROMPT_V2)

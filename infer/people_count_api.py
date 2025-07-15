@@ -15,9 +15,9 @@ def process_video_ebc2(video_path: str, time_interval: int):
     결과를 리눅스 /tmp 경로에 저장합니다 (원본, 처리된 영상, CSV).
     """
     # 경로 설정
-    tmp_dir = "/tmp/ebc_video"
+    tmp_dir = "/tmp/ebc_video_result"
     os.makedirs(tmp_dir, exist_ok=True)
-
+    
     base_filename = os.path.splitext(os.path.basename(video_path))[0]
     tmp_video_path = os.path.join(tmp_dir, f"{base_filename}_original.mp4")
     output_filename = os.path.join(tmp_dir, f"{base_filename}_processed.mp4")
@@ -72,6 +72,14 @@ def process_video_ebc2(video_path: str, time_interval: int):
                     'time': time_str,
                     'count': count
                 })
+
+                # 저장용 파일명 생성
+                frame_filename = os.path.join(
+                    tmp_dir,
+                    f"{base_filename}_frame{frame_index:05d}_count{count:.2f}.jpg"
+                )
+                # 이미지 저장
+                cv2.imwrite(frame_filename, frame)
 
                 latest_text = f"Count: {count:.2f}"
             except Exception as e:
@@ -272,7 +280,7 @@ def process_image_ebc_dtro(folder_path: str, save_dot_map: bool = True):
     model = ClipEBCOnnx(onnx_model_path="/home/ws-internvl/DTRO/Crowd_People_Counting_Server_API/assets/CLIP_EBC_nwpu_rmse_onnx.onnx")
 
     # 저장 디렉토리
-    tmp_dir = "/tmp/ebc_image_results"
+    tmp_dir = "/tmp/ebc_image_det_dense_results"
     asset_dir = "assets/ebc_image_results"
     os.makedirs(tmp_dir, exist_ok=True)
     os.makedirs(asset_dir, exist_ok=True)
