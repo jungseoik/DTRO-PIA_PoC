@@ -211,8 +211,8 @@ __marimo__/
 Package-Common-AI-pia_ai_package
 *.ttf
 *.csv
-main.py
 run.py
 test.py
-clienet.py
 predict_output
+assets/ebc_image_results
+assets/sample_cnt

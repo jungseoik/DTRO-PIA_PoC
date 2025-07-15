@@ -21,7 +21,7 @@ st.set_page_config(
 
 st.sidebar.image(logo_white)
 logo_header_ui()
-tab_count_video, tab_count_image, tab_falldown_image, tab_falldown_video = st.tabs(["People Count Video", "People Count Image" , "Falldown image", "falldown video"])
+tab_count_video, tab_count_image, tab_falldown_image, tab_falldown_video = st.tabs(["People Count Video", "People Count Image" , "Falldown image", "Falldown video"])
 
 with tab_count_video:
     count_video_tab()

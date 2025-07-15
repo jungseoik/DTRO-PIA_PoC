@@ -8,15 +8,23 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from torchvision.transforms import ToTensor, Normalize
 from torchvision.transforms.functional import normalize, to_pil_image
-import json
 import datetime
 from scipy.ndimage import gaussian_filter
 from sklearn.cluster import KMeans
-import assets
-
+import cv2
 # 프로젝트 루트 디렉토리 설정
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
+
+def to_rgb_numpy(image):
+    if isinstance(image, np.ndarray):
+        # 이미 ndarray면 색상 순서만 확인
+        if image.shape[2] == 3:
+            return image  # 이미 RGB일 가능성 있음 (확실치 않으면 np.flip(..., axis=-1) 고려)
+    elif 'PIL' in str(type(image)):
+        return np.array(image.convert('RGB'))
+    else:
+        raise ValueError("지원하지 않는 이미지 형식입니다.")
 
 class ClipEBCOnnx:
     """
@@ -377,7 +385,8 @@ class ClipEBCOnnx:
         image_from_plot = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         image_from_plot = image_from_plot.reshape(fig.canvas.get_width_height()[::-1] + (4,))
         image_from_plot = image_from_plot[:,:,:3]  # RGB로 변환
-        
+        plt.close(fig)  # ✅ 메모리 누수 방지
+
         return fig, image_from_plot
     
     def visualize_dots(self, dot_size: int = 20, sigma: float = 1, percentile: float = 97, 
@@ -398,6 +407,8 @@ class ClipEBCOnnx:
                 - matplotlib figure의 canvas 객체
                 - RGB 형식의 시각화된 이미지 배열 (H, W, 3)
         """
+        MAX_CANDIDATES = 5000  # 메모리 보호용 상한선
+
         if self.density_map is None or self.processed_image is None:
             raise ValueError("먼저 predict 메서드를 실행하여 예측을 수행해야 합니다.")
             
@@ -406,22 +417,31 @@ class ClipEBCOnnx:
         if adjusted_pred_count == 0:
             print("💡 예측된 군중 수가 0입니다. dot 시각화를 건너뜁니다.")
             return None, None
-
         fig, ax = plt.subplots(dpi=200, frameon=False)
-        ax.imshow(self.processed_image)
+
+        img_np = np.array(self.processed_image)
+        rgb_image = img_np[..., ::-1]  # BGR → RGB 강제 변환
+        ax.imshow(rgb_image)
+
+        # ax.imshow(self.processed_image)
         
         filtered_density = gaussian_filter(self.density_map, sigma=sigma)
         
         threshold = np.percentile(filtered_density, percentile)
         candidate_pixels = np.column_stack(np.where(filtered_density >= threshold))
-        
-        if len(candidate_pixels) > adjusted_pred_count:
+        # 후보 픽셀이 너무 많으면 랜덤 샘플링 (메모리 폭증 방지)
+        if len(candidate_pixels) > MAX_CANDIDATES:
+            idx = np.random.choice(len(candidate_pixels), MAX_CANDIDATES, replace=False)
+            candidate_pixels = candidate_pixels[idx]
+
+        # 클러스터 수가 샘플 수보다 많은 경우 처리
+        if adjusted_pred_count > len(candidate_pixels):
+            head_positions = candidate_pixels
+        else:
             kmeans = KMeans(n_clusters=adjusted_pred_count, random_state=42, n_init=10)
             kmeans.fit(candidate_pixels)
             head_positions = kmeans.cluster_centers_.astype(int)
-        else:
-            head_positions = candidate_pixels
-            
+
         y_coords, x_coords = head_positions[:, 0], head_positions[:, 1]
         ax.scatter(x_coords, y_coords, 
                     c='red',
@@ -446,7 +466,7 @@ class ClipEBCOnnx:
         image_from_plot = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         image_from_plot = image_from_plot.reshape(fig.canvas.get_width_height()[::-1] + (4,))
         image_from_plot = image_from_plot[:,:,:3]  # RGB로 변환
-        
+        plt.close(fig)  # ✅ 메모리 누수 방지
         return fig.canvas, image_from_plot
     
     def crowd_count(self):

@@ -15,6 +15,53 @@ def parse_response(response_data: dict) -> str | None:
     except:
         return None
 
+def parse_vision_response(result_text: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Vision API 응답을 파싱하여 category와 description을 추출하는 함수
+    
+    Args:
+        result_text: API 응답 텍스트
+    
+    Returns:
+        Tuple[str|None, str|None]: (category, description) 
+        파싱 실패시 (None, None) 반환
+    """
+    if not result_text:
+        return None, None
+
+    cleaned = result_text.strip()
+
+    # ```json 또는 ``` 제거
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```json|^```|```$", "", cleaned.strip(), flags=re.IGNORECASE).strip()
+
+    # 불필요한 따옴표 정리
+    cleaned = cleaned.replace('""', '"')
+
+    category = None
+    description = None
+
+    try:
+        # JSON 파싱 시도
+        parsed = json.loads(cleaned)
+        category = parsed.get("category")
+        description = parsed.get("description")
+        
+    except json.JSONDecodeError:
+        # JSON 파싱 실패시 정규식으로 추출
+        
+        # category 추출
+        cat_match = re.search(r'"?category"?\s*:\s*"([^"]*)"', cleaned, re.IGNORECASE)
+        if cat_match:
+            category = cat_match.group(1)
+        
+        # description 추출
+        desc_match = re.search(r'"?description"?\s*:\s*"([^"]*)"', cleaned, re.IGNORECASE)
+        if desc_match:
+            description = desc_match.group(1)
+
+    return category, description
+
 # 또는 OpenCV로 이미지를 읽어서 처리하고 싶다면:
 def internvl_vision_api_response(image_path: str, question: str) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -67,54 +114,6 @@ def internvl_vision_api_response(image_path: str, question: str) -> Tuple[Option
     except Exception as e:
         print(f"API 요청 중 오류: {e}")
         return None, None
-    
-
-def parse_vision_response(result_text: str) -> Tuple[Optional[str], Optional[str]]:
-    """
-    Vision API 응답을 파싱하여 category와 description을 추출하는 함수
-    
-    Args:
-        result_text: API 응답 텍스트
-    
-    Returns:
-        Tuple[str|None, str|None]: (category, description) 
-        파싱 실패시 (None, None) 반환
-    """
-    if not result_text:
-        return None, None
-
-    cleaned = result_text.strip()
-
-    # ```json 또는 ``` 제거
-    if cleaned.startswith("```"):
-        cleaned = re.sub(r"^```json|^```|```$", "", cleaned.strip(), flags=re.IGNORECASE).strip()
-
-    # 불필요한 따옴표 정리
-    cleaned = cleaned.replace('""', '"')
-
-    category = None
-    description = None
-
-    try:
-        # JSON 파싱 시도
-        parsed = json.loads(cleaned)
-        category = parsed.get("category")
-        description = parsed.get("description")
-        
-    except json.JSONDecodeError:
-        # JSON 파싱 실패시 정규식으로 추출
-        
-        # category 추출
-        cat_match = re.search(r'"?category"?\s*:\s*"([^"]*)"', cleaned, re.IGNORECASE)
-        if cat_match:
-            category = cat_match.group(1)
-        
-        # description 추출
-        desc_match = re.search(r'"?description"?\s*:\s*"([^"]*)"', cleaned, re.IGNORECASE)
-        if desc_match:
-            description = desc_match.group(1)
-
-    return category, description
 
 import numpy as np
 

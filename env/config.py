@@ -2,6 +2,29 @@ MAX_WIDTH = 854
 MAX_HEIGHT = 480
 API_URL = "http://localhost:8000/predict_json" 
 
+PROMPT = """You are an expert in image-based posture evaluation. Review the image and decide the state of the person on the escalator.
+
+Classification Rules:
+- 'fallOnEscalator':
+ - Subject lying down
+ - Subject seated
+ - Subject kneeling (any knee touching)
+
+- 'normal':
+ - Subject walking or standing
+ - Holding the rail while standing upright
+ - Crouching without knee contact
+
+Important:
+If there's doubt or unclear details, default to 'fallOnEscalator'.
+
+Output Format:
+Return a valid JSON with:
+- "category": "fallOnEscalator" or "normal"
+- "description": brief explanation (e.g., "person crouching upright")
+
+Only return the JSON. No extra explanation."""
+
 PROMPT_V3 = """
 Analyze this image carefully. Determine if a person has fallen down.
 
