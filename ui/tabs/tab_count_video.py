@@ -200,7 +200,7 @@ def count_video_tab():
 
     button =  st.button("▶️ Run Inference")
     st.divider()
-
+    
     col_original, col_people_count= st.columns(2, gap="medium")
     with col_original:
         st.subheader("Video")

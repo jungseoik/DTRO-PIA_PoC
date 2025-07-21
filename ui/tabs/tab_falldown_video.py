@@ -107,7 +107,7 @@ class InferenceConsumer_vqa(threading.Thread):
                 is_last = item["is_last"]
 
                 print(f"🧠 Inference: frame_idx={frame_idx}, is_last={is_last}")
-                result_cate, result_dsec = internvl_vision_api_response_vqa(frame, question = PROMPT_V2)
+                result_cate, result_dsec = internvl_vision_api_response_vqa(frame, question = PROMPT_V3)
                 if result_cate:
                     self.frame_queue_result.put((frame_idx, result_cate, result_dsec), timeout=1)
                 

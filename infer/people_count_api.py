@@ -191,7 +191,7 @@ def process_image_ebc(folder_path: str):
     if not os.path.exists(folder_path):
         print(f"❌ Error: 폴더 '{folder_path}'을(를) 찾을 수 없습니다.")
         return
-
+    
     image_extensions = ['*.jpg', '*.jpeg', '*.png', '*.bmp', '*.tiff', '*.tif', '*.webp']
 
     image_files = []
