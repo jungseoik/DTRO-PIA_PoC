@@ -4,7 +4,7 @@ from utils.clip_ebc_onnx import ClipEBCOnnx
 
 def declare_all_session_states():
     """Declare all session state variables."""
-    st.session_state.clip_ebc_model = ClipEBCOnnx(onnx_model_path="/home/ws-internvl/DTRO/Crowd_People_Counting_Server_API/assets/CLIP_EBC_nwpu_rmse_onnx.onnx")
+    st.session_state.clip_ebc_model = ClipEBCOnnx(onnx_model_path="assets/CLIP_EBC_nwpu_rmse_onnx.onnx")
     init_video_state()
     init_ebc_image_state()
     init_falldown_image_state()

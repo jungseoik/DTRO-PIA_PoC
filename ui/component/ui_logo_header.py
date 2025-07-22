@@ -9,8 +9,8 @@ def get_image_as_base64(path):
 
 def logo_header_ui():
 
-    dtro_logo_svg = get_image_as_base64("/home/ws-internvl/DTRO/Crowd_People_Counting_Server_API/assets/dtro.svg")
-    pia_log_png = get_image_as_base64("/home/ws-internvl/DTRO/Crowd_People_Counting_Server_API/assets/pia-logo-white.png")
+    dtro_logo_svg = get_image_as_base64("assets/dtro.svg")
+    pia_log_png = get_image_as_base64("assets/pia-logo-white.png")
 
     # logo_dark = Image.open('assets/pia-logo-dark.png') 
     # logo_white = Image.open('assets/pia-logo-white.png') 
