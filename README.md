@@ -2,16 +2,16 @@
 
 <p align="center">
   <span style="display: inline-flex; align-items: center;">
-    <img alt="PIA Logo" src="https://raw.githubusercontent.com/jungseoik/Crowd_People_Counting_Server_API/main/assets/pia-logo-dark.png" height="60" style="margin-right: 8px;">
+    <img alt="PIA Logo" src="https://raw.githubusercontent.com/jungseoik/DTRO-PIA_PoC/main/assets/pia-logo-dark.png" height="60" style="margin-right: 8px;">
     <span style="font-size: 80px; color: #555; margin-right: 8px;">&</span>
-    <img alt="DTRO Logo" src="https://raw.githubusercontent.com/jungseoik/Crowd_People_Counting_Server_API/main/assets/dtro.svg" height="60">
+    <img alt="DTRO Logo" src="https://raw.githubusercontent.com/jungseoik/DTRO-PIA_PoC/main/assets/dtro.svg" height="60">
   </span>
 </p>
 
-<br/>
+---
 
 <p align="center">
-  <img alt="Main Page" src="https://raw.githubusercontent.com/jungseoik/Crowd_People_Counting_Server_API/main/assets/main_page.png" style="max-width: 100%;">
+  <img alt="Main Page" src="https://raw.githubusercontent.com/jungseoik/DTRO-PIA_PoC/main/assets/main_page.png" style="max-width: 100%;">
 </p>
 
 ---
