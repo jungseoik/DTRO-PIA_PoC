@@ -3,7 +3,7 @@
 <p align="center">
   <span style="display: inline-flex; align-items: center;">
     <img alt="PIA Logo" src="https://raw.githubusercontent.com/jungseoik/Crowd_People_Counting_Server_API/main/assets/pia-logo-dark.png" height="60" style="margin-right: 8px;">
-    <span style="font-size: 40px; color: #555; margin-right: 8px;">&</span>
+    <span style="font-size: 80px; color: #555; margin-right: 8px;">&</span>
     <img alt="DTRO Logo" src="https://raw.githubusercontent.com/jungseoik/Crowd_People_Counting_Server_API/main/assets/dtro.svg" height="60">
   </span>
 </p>
@@ -16,9 +16,9 @@
 
 ---
 
-## PIA 스페이스와 DTRO가 협업한 Crowd People Counting PoC 프로젝트의 공식 구현 레포지토리입니다.
+## PIA-SPACE와 DTRO가 협업한 PoC 프로젝트의 공식 구현 레포지토리입니다.
 
-본 저장소는 사람 수 카운팅 기능의 프론트엔드 및 백엔드 구성 예제를 포함하며,  
+본 저장소는 사람 수 카운팅, 실시간 에스컬레이터 쓰러짐 탐지 기능의 프론트엔드 및 백엔드 구성 예제를 포함하며,  
 실제 프로토타입 시연에 활용된 코드를 정리한 것입니다.
 
 ## Install
