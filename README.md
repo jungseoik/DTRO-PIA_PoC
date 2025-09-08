@@ -32,6 +32,14 @@ pip install -r requirements.txt
 ### 실행순서:
 - [TRTLLM Server API Documentation](docs/README_TRTLLM_SERVER.md)
 - [HF ONNX Down Documentation](docs/README_onnx_download.md)
+
+```bash
+위에 전부 완료되면
+
+streamlit run homepage.py
+
+```
+
 ### UI 사용 설명:
 - [UI - People Count Image Documentation](docs/README_DOCS_People_count_image_main.md)
 - [UI - People Count Video Documentation](docs/README_DOCS_People_count_video_main.md)
