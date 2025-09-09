@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 
 ### 실행순서:
-- [TRTLLM Server API Documentation](docs/README_TRTLLM_SERVER.md)
+- [TRTLLM Server API Documentation](docs/README_TRTLLM_SERVER_path_assets.md)
 - [HF ONNX Down Documentation](docs/README_onnx_download.md)
 
 ```bash
