@@ -39,6 +39,11 @@ pip install -r requirements.txt
 streamlit run homepage.py
 
 ```
+### 주의사항 :
+- 1분 이상 영상은 사용하지 마세요(쓰레드 큐 메모리가 터집니다, 오로지 짧은 영상 POC용입니다)
+- 프롬프트 변경 필요 시 env/config.py 에서 알림 프롬프트를 수정하면 됩니다. 참고바랍니다.
+- 현재 레포에서는 영상 추론 작업 종료 후 쓰레드를 관리하지 않습니다. 반복 동작이 수행 안될 수 있습니다. 따라서 영상 작업을 수행한다면 반드시 streamlit을 전부 껐다 재사용 바랍니다.
+
 
 ### UI 사용 설명:
 - [UI - People Count Image Documentation](docs/README_DOCS_People_count_image_main.md)
